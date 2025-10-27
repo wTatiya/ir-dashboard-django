@@ -1,3 +1,4 @@
+import os
 SECRET_KEY = os.environ.get('SECRET_KEY', '9f4ac7a0d54142a03913b1d95bea142b')
 DEBUG = True
 ALLOWED_HOSTS = ['*']
