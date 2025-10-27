@@ -6,18 +6,17 @@ from django.core.management import call_command
 from django.contrib.auth import get_user_model
 
 
-# ✅ Renders index.html for the homepage
 def index(request):
     return render(request, 'index.html')
 
 
-# ✅ Runs migrations manually (visit /run-migrations/)
+# ✅ Add this route to manually trigger migrations
 def run_migrations(request):
     call_command('migrate')
     return HttpResponse("Migrations complete.")
 
 
-# ✅ Creates a superuser (visit /create-superuser/ once)
+# ✅ Add this route to create an admin account
 def create_superuser(request):
     User = get_user_model()
     if not User.objects.filter(username='admin').exists():
@@ -26,10 +25,9 @@ def create_superuser(request):
     return HttpResponse("Superuser already exists.")
 
 
-# ✅ All available routes
 urlpatterns = [
     path('', index),
     path('admin/', admin.site.urls),
-    path('run-migrations/', run_migrations),
-    path('create-superuser/', create_superuser),
+    path('run-migrations/', run_migrations),           # << you likely missed this line!
+    path('create-superuser/', create_superuser),       # << and maybe this one too
 ]
